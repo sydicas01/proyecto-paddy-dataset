@@ -1,0 +1,6 @@
+Programa de Extension Agricola - Ficha de Asesoria
+Asesor: dst
+Registros unicos analizados: 2338
+Rendimiento medio: 5985.00 kg/ha
+Superficie de mayor rendimiento medio: 5 ha
+R2 del modelo de superficie (prueba): 0.3430

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>reporte.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="informe-técnico">Informe Técnico</h1>
+<p><strong>Nombre:</strong> Diego Castro Saavedra<br>
+<strong>Evaluación:</strong> Evaluación 1 — Análisis de <em>Paddy Dataset</em><br>
+<strong>Fecha:</strong> 22 de octubre de 2026<br>
+<strong>Fuente de datos:</strong> Subramaniyan, M. (2023). <em>Paddy Dataset</em> [Conjunto de datos]. UCI Machine Learning Repository. https://doi.org/10.24432/C55W3J.</p>
+<hr>
+<h2 id="índice-de-contenidos">Índice de Contenidos</h2>
+<ol>
+<li><a href="#1-metodolog%C3%ADa-de-trabajo">Metodología de Trabajo</a></li>
+<li><a href="#2-limpieza-de-datos-secci%C3%B3n-11">Limpieza de Datos (Sección 1.1)</a></li>
+<li><a href="#3-an%C3%A1lisis-exploratorio-de-datos-secci%C3%B3n-12">Análisis Exploratorio de Datos (Sección 1.2)</a></li>
+<li><a href="#4-modelaci%C3%B3n-predictiva-secci%C3%B3n-13">Modelación Predictiva (Sección 1.3)</a></li>
+<li><a href="#5-ficha-de-asesor%C3%ADa-agr%C3%ADcola-secci%C3%B3n-14">Ficha de Asesoría Agrícola (Sección 1.4)</a></li>
+<li><a href="#6-limitaciones-del-dataset">Limitaciones del Dataset</a></li>
+<li><a href="#7-conclusiones-y-recomendaciones">Conclusiones y Recomendaciones</a></li>
+<li><a href="#8-reproducibilidad-del-proyecto">Reproducibilidad del Proyecto</a></li>
+</ol>
+<hr>
+<h2 id="1-metodología-de-trabajo">1. Metodología de Trabajo</h2>
+<p>El análisis se desarrolló utilizando las siguiente herramientas de línea de comandos de Unix:</p>
+<ul>
+<li><strong>Obtención (<code>curl</code>, <code>unzip</code>):</strong> Descarga automatizada del archivo comprimido desde el repositorio UCI y extracción en <code>data/</code>.</li>
+<li><strong>Limpieza (<code>file</code>, <code>head</code>, <code>cat -A</code>, <code>wc</code>, <code>tr</code>, <code>sed</code>, <code>sort</code>, <code>uniq</code>, <code>awk</code>, <code>csvstat</code>):</strong> Inspección del tipo de archivo y caracteres ocultos, eliminación de retornos de carro DOS (<code>\r</code>), estandarización de encabezados a <code>snake_case</code>, validación de nulos y coherencia lógica, eliminación de duplicados exactos y creación de variables por hectárea.</li>
+<li><strong>Exploración (<code>csvcut</code>, <code>csvstat</code>, <code>awk</code>, <code>python3</code>, <code>rush plot</code>):</strong> Cálculo de estadísticos descriptivos, conteo de valores únicos (cardinalidad), verificación de invarianza de clima por bloque e insumos por hectárea, resúmenes agrupados, correlaciones de Pearson y gráficos de caja (<em>boxplots</em>).</li>
+<li><strong>Modelación (<code>shuf</code>, <code>awk</code>, <code>vw</code>, <code>python3</code>):</strong> Partición aleatoria reproducible 70/30 con semilla fija (42), conversión al formato de espacios de nombres de <em>Vowpal Wabbit</em>, ajuste de modelos lineales con pérdida cuadrática (<code>--loss_function squared</code>) y evaluación de MAE y R² en el conjunto de prueba.</li>
+</ul>
+<hr>
+<h2 id="2-limpieza-de-datos-sección-11">2. Limpieza de Datos (Sección 1.1)</h2>
+<h3 id="inspección-de-formato-y-mapeo-de-columnas">Inspección de formato y mapeo de columnas</h3>
+<p>Al ejecutar <code>file data/paddydataset.csv</code>, la herramienta identificó el archivo como <code>CSV text</code>. Al inspeccionar las primeras líneas con <code>head -n 5 data/paddydataset.csv | cat -A</code>, se detectó que las líneas terminaban con el carácter de retorno de carro DOS/Windows <code>^M$</code> (<code>CRLF</code>, <code>\r\n</code>) y que los nombres de las columnas presentaban espacios finales (<code>Hectares </code>), espacios internos, mayúsculas, barras (<code>/</code>) y paréntesis.</p>
+<p>Se eliminaron los retornos de carro mediante <code>tr -d '\r'</code> y se normalizó el encabezado con <code>tr</code> y <code>sed</code>, obteniendo nombres simples y consistentes en <code>snake_case</code>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">N°</th>
+<th style="text-align:left">Nombre Original</th>
+<th style="text-align:left">Nombre Nuevo</th>
+<th style="text-align:left">N°</th>
+<th style="text-align:left">Nombre Original</th>
+<th style="text-align:left">Nombre Nuevo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><code>Hectares </code></td>
+<td style="text-align:left"><code>hectares</code></td>
+<td style="text-align:left">25</td>
+<td style="text-align:left"><code>Max temp_D1_D30</code></td>
+<td style="text-align:left"><code>max_temp_d1_d30</code></td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><code>Agriblock</code></td>
+<td style="text-align:left"><code>agriblock</code></td>
+<td style="text-align:left">26</td>
+<td style="text-align:left"><code>Min temp_D31_D60</code></td>
+<td style="text-align:left"><code>min_temp_d31_d60</code></td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><code>Variety</code></td>
+<td style="text-align:left"><code>variety</code></td>
+<td style="text-align:left">27</td>
+<td style="text-align:left"><code>Max temp_D31_D60</code></td>
+<td style="text-align:left"><code>max_temp_d31_d60</code></td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><code>Soil Types</code></td>
+<td style="text-align:left"><code>soil_types</code></td>
+<td style="text-align:left">28</td>
+<td style="text-align:left"><code>Min temp_D61_D90</code></td>
+<td style="text-align:left"><code>min_temp_d61_d90</code></td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><code>Seedrate(in Kg)</code></td>
+<td style="text-align:left"><code>seedrate_in_kg</code></td>
+<td style="text-align:left">29</td>
+<td style="text-align:left"><code>Max temp_D61_D90</code></td>
+<td style="text-align:left"><code>max_temp_d61_d90</code></td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><code>LP_Mainfield(in Tonnes)</code></td>
+<td style="text-align:left"><code>lp_mainfield_in_tonnes</code></td>
+<td style="text-align:left">30</td>
+<td style="text-align:left"><code>Min temp_D91_D120</code></td>
+<td style="text-align:left"><code>min_temp_d91_d120</code></td>
+</tr>
+<tr>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><code>Nursery</code></td>
+<td style="text-align:left"><code>nursery</code></td>
+<td style="text-align:left">31</td>
+<td style="text-align:left"><code>Max temp_D91_D120</code></td>
+<td style="text-align:left"><code>max_temp_d91_d120</code></td>
+</tr>
+<tr>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><code>Nursery area (Cents)</code></td>
+<td style="text-align:left"><code>nursery_area_cents</code></td>
+<td style="text-align:left">32</td>
+<td style="text-align:left"><code>Inst Wind Speed_D1_D30(in Knots)</code></td>
+<td style="text-align:left"><code>inst_wind_speed_d1_d30_in_knots</code></td>
+</tr>
+<tr>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><code>LP_nurseryarea(in Tonnes)</code></td>
+<td style="text-align:left"><code>lp_nurseryarea_in_tonnes</code></td>
+<td style="text-align:left">33</td>
+<td style="text-align:left"><code>Inst Wind Speed_D31_D60(in Knots)</code></td>
+<td style="text-align:left"><code>inst_wind_speed_d31_d60_in_knots</code></td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><code>DAP_20days</code></td>
+<td style="text-align:left"><code>dap_20days</code></td>
+<td style="text-align:left">34</td>
+<td style="text-align:left"><code>Inst Wind Speed_D61_D90(in Knots)</code></td>
+<td style="text-align:left"><code>inst_wind_speed_d61_d90_in_knots</code></td>
+</tr>
+<tr>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><code>Weed28D_thiobencarb</code></td>
+<td style="text-align:left"><code>weed28d_thiobencarb</code></td>
+<td style="text-align:left">35</td>
+<td style="text-align:left"><code>Inst Wind Speed_D91_D120(in Knots)</code></td>
+<td style="text-align:left"><code>inst_wind_speed_d91_d120_in_knots</code></td>
+</tr>
+<tr>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><code>Urea_40Days</code></td>
+<td style="text-align:left"><code>urea_40days</code></td>
+<td style="text-align:left">36</td>
+<td style="text-align:left"><code>Wind Direction_D1_D30</code></td>
+<td style="text-align:left"><code>wind_direction_d1_d30</code></td>
+</tr>
+<tr>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><code>Potassh_50Days</code></td>
+<td style="text-align:left"><code>potassh_50days</code></td>
+<td style="text-align:left">37</td>
+<td style="text-align:left"><code>Wind Direction_D31_D60</code></td>
+<td style="text-align:left"><code>wind_direction_d31_d60</code></td>
+</tr>
+<tr>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><code>Micronutrients_70Days</code></td>
+<td style="text-align:left"><code>micronutrients_70days</code></td>
+<td style="text-align:left">38</td>
+<td style="text-align:left"><code>Wind Direction_D61_D90</code></td>
+<td style="text-align:left"><code>wind_direction_d61_d90</code></td>
+</tr>
+<tr>
+<td style="text-align:left">15</td>
+<td style="text-align:left"><code>Pest_60Day(in ml)</code></td>
+<td style="text-align:left"><code>pest_60day_in_ml</code></td>
+<td style="text-align:left">39</td>
+<td style="text-align:left"><code>Wind Direction_D91_D120</code></td>
+<td style="text-align:left"><code>wind_direction_d91_d120</code></td>
+</tr>
+<tr>
+<td style="text-align:left">16</td>
+<td style="text-align:left"><code>30DRain( in mm)</code></td>
+<td style="text-align:left"><code>30drain_in_mm</code></td>
+<td style="text-align:left">40</td>
+<td style="text-align:left"><code>Relative Humidity_D1_D30</code></td>
+<td style="text-align:left"><code>relative_humidity_d1_d30</code></td>
+</tr>
+<tr>
+<td style="text-align:left">17</td>
+<td style="text-align:left"><code>30DAI(in mm)</code></td>
+<td style="text-align:left"><code>30dai_in_mm</code></td>
+<td style="text-align:left">41</td>
+<td style="text-align:left"><code>Relative Humidity_D31_D60</code></td>
+<td style="text-align:left"><code>relative_humidity_d31_d60</code></td>
+</tr>
+<tr>
+<td style="text-align:left">18</td>
+<td style="text-align:left"><code>30_50DRain( in mm)</code></td>
+<td style="text-align:left"><code>30_50drain_in_mm</code></td>
+<td style="text-align:left">42</td>
+<td style="text-align:left"><code>Relative Humidity_D61_D90</code></td>
+<td style="text-align:left"><code>relative_humidity_d61_d90</code></td>
+</tr>
+<tr>
+<td style="text-align:left">19</td>
+<td style="text-align:left"><code>30_50DAI(in mm)</code></td>
+<td style="text-align:left"><code>30_50dai_in_mm</code></td>
+<td style="text-align:left">43</td>
+<td style="text-align:left"><code>Relative Humidity_D91_D120</code></td>
+<td style="text-align:left"><code>relative_humidity_d91_d120</code></td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left"><code>51_70DRain(in mm)</code></td>
+<td style="text-align:left"><code>51_70drain_in_mm</code></td>
+<td style="text-align:left">44</td>
+<td style="text-align:left"><code>Trash(in bundles)</code></td>
+<td style="text-align:left"><code>trash_in_bundles</code></td>
+</tr>
+<tr>
+<td style="text-align:left">21</td>
+<td style="text-align:left"><code>51_70AI(in mm)</code></td>
+<td style="text-align:left"><code>51_70ai_in_mm</code></td>
+<td style="text-align:left">45</td>
+<td style="text-align:left"><code>Paddy yield(in Kg)</code></td>
+<td style="text-align:left"><code>paddy_yield_in_kg</code></td>
+</tr>
+<tr>
+<td style="text-align:left">22</td>
+<td style="text-align:left"><code>71_105DRain(in mm)</code></td>
+<td style="text-align:left"><code>71_105drain_in_mm</code></td>
+<td style="text-align:left">46</td>
+<td style="text-align:left"><em>(Variable calculada)</em></td>
+<td style="text-align:left"><code>rendimiento_ha</code></td>
+</tr>
+<tr>
+<td style="text-align:left">23</td>
+<td style="text-align:left"><code>71_105DAI(in mm)</code></td>
+<td style="text-align:left"><code>71_105dai_in_mm</code></td>
+<td style="text-align:left">47</td>
+<td style="text-align:left"><em>(Variable calculada)</em></td>
+<td style="text-align:left"><code>trash_ha</code></td>
+</tr>
+<tr>
+<td style="text-align:left">24</td>
+<td style="text-align:left"><code>Min temp_D1_D30</code></td>
+<td style="text-align:left"><code>min_temp_d1_d30</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="verificación-de-filas-respecto-a-la-ficha-del-repositorio">Verificación de filas respecto a la ficha del repositorio</h3>
+<p>La ficha del repositorio UCI declara 2.790 instancias. El comando <code>wc -l data/paddydataset.csv</code> arrojó 2.790 líneas, que corresponden a 1 fila de cabecera y 2.789 filas de datos. La diferencia de 1 fila se debe a que el repositorio contabilizó la línea de encabezados dentro del total de instancias.</p>
+<h3 id="valores-faltantes-y-coherencia-de-los-datos">Valores faltantes y coherencia de los datos</h3>
+<ul>
+<li><strong>Valores faltantes:</strong> Mediante <code>csvstat data/paddy_renamed.csv --nulls</code> se comprobó que las 45 columnas tienen <code>False</code> (0 valores faltantes).</li>
+<li><strong>Coherencia de los datos:</strong> Con <code>awk</code> se verificó que en ninguno de los 4 tramos (<code>D1_D30</code>, <code>D31_D60</code>, <code>D61_D90</code>, <code>D91_D120</code>) la temperatura mínima supera a la máxima (0 incoherencias), y que los valores de superficie (<code>hectares &gt; 0</code>), residuos (<code>trash_in_bundles &gt;= 0</code>) y rendimiento (<code>paddy_yield_in_kg &gt; 0</code>) se encuentran en rangos plausibles y positivos (0 errores).</li>
+</ul>
+<h3 id="filas-duplicadas-y-conteo-antes-y-después-de-cada-paso">Filas duplicadas y conteo antes y después de cada paso</h3>
+<p>Con <code>tail -n +2 data/paddy_renamed.csv | sort | uniq -d | wc -l</code> se detectaron 361 perfiles distintos repetidos. Al eliminar las repeticiones con <code>sort | uniq</code>, los registros pasaron de 2.789 a 2.338 filas únicas, eliminándose 451 copias duplicadas exactas. Se justificó su eliminación porque, al no existir identificador de predio ni fecha, las filas idénticas distorsionan las frecuencias reales y generan fuga de información entre entrenamiento y prueba.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Paso del pipeline</th>
+<th style="text-align:left">Archivo</th>
+<th style="text-align:left">Líneas totales (<code>wc -l</code>)</th>
+<th style="text-align:left">Filas de datos (sin cabecera)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1. Archivo original</td>
+<td style="text-align:left"><code>data/paddydataset.csv</code></td>
+<td style="text-align:left">2.790</td>
+<td style="text-align:left">2.789</td>
+</tr>
+<tr>
+<td style="text-align:left">2. Conversión a Unix (<code>tr -d '\r'</code>) y renombre</td>
+<td style="text-align:left"><code>data/paddy_renamed.csv</code></td>
+<td style="text-align:left">2.790</td>
+<td style="text-align:left">2.789</td>
+</tr>
+<tr>
+<td style="text-align:left">3. Eliminación de duplicados (-451 copias)</td>
+<td style="text-align:left"><code>data/paddy_dedup.csv</code></td>
+<td style="text-align:left">2.339</td>
+<td style="text-align:left">2.338</td>
+</tr>
+<tr>
+<td style="text-align:left">4. Creación de <code>rendimiento_ha</code> y <code>trash_ha</code></td>
+<td style="text-align:left"><code>data/paddy_clean.csv</code></td>
+<td style="text-align:left">2.339</td>
+<td style="text-align:left"><strong>2.338</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-análisis-exploratorio-de-datos-sección-12">3. Análisis Exploratorio de Datos (Sección 1.2)</h2>
+<h3 id="estadísticos-descriptivos-csvstat">Estadísticos descriptivos (<code>csvstat</code>)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Variable</th>
+<th style="text-align:left">Mínimo</th>
+<th style="text-align:left">Mediana</th>
+<th style="text-align:left">Media</th>
+<th style="text-align:left">Máximo</th>
+<th style="text-align:left">Desv. Estándar</th>
+<th style="text-align:left">Valores Únicos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong><code>hectares</code></strong></td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">3,736</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left">1,450</td>
+<td style="text-align:left">6</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><code>paddy_yield_in_kg</code></strong></td>
+<td style="text-align:left">5.410</td>
+<td style="text-align:left">24.644</td>
+<td style="text-align:left">22.610,118</td>
+<td style="text-align:left">38.814</td>
+<td style="text-align:left">9.265,185</td>
+<td style="text-align:left">477</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><code>rendimiento_ha</code></strong></td>
+<td style="text-align:left">5.410</td>
+<td style="text-align:left">5.964</td>
+<td style="text-align:left">5.985,004</td>
+<td style="text-align:left">6.469</td>
+<td style="text-align:left">289,353</td>
+<td style="text-align:left">175</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cardinalidad-csvstat---unique">Cardinalidad (<code>csvstat --unique</code>)</h3>
+<ul>
+<li><strong>Variables categóricas:</strong> <code>agriblock</code> (6), <code>variety</code> (3), <code>soil_types</code> (2) y <code>nursery</code> (2). En estas variables categóricas es esperable tener pocos valores distintos.</li>
+<li><strong>Superficie e insumos:</strong> <code>hectares</code> y las 10 columnas de insumos agrícolas tienen exactamente 6 valores distintos cada una, mientras que <code>trash_ha</code> tiene solo 3 valores distintos (80, 90 y 100 fardos/ha).</li>
+<li><strong>Clima:</strong> Las lluvias y riegos tienen solo 3 valores distintos, la velocidad del viento 3 a 4 valores, y las temperaturas, direcciones de viento y humedades 5 a 6 valores. En variables ambientales continuas no es esperable una cardinalidad tan baja en 2.338 parcelas, lo que revela que fueron asignadas de forma agregada.</li>
+</ul>
+<h3 id="comprobación-del-clima-por-agriblock-e-insumos-por-hectárea">Comprobación del clima por <code>Agriblock</code> e insumos por hectárea</h3>
+<ul>
+<li><strong>Clima por bloque:</strong> Al extraer con <code>awk</code> cada bloque junto con sus 24 variables de clima (<code>sort | uniq | cut -d, -f1 | sort | uniq -c</code>), cada uno de los 6 bloques (<code>Chinnasalem</code>, <code>Cuddalore</code>, <code>Kallakurichi</code>, <code>Kurinjipadi</code>, <code>Panruti</code>, <code>Sankarapuram</code>) presenta exactamente 1 combinación climática (<code>1</code>). Esto implica que el clima es constante dentro de cada bloque y solo actúa como etiqueta geográfica regional.</li>
+<li><strong>Insumos por hectárea:</strong> Al dividir los 10 insumos por <code>hectares</code> en las 2.338 filas (<code>awk ... | sort | uniq -c</code>), las 2.338 filas arrojan 1 única combinación constante (<code>25</code> kg/ha de semilla, <code>12.5</code> t/ha abono campo, <code>20</code> cents/ha vivero, <code>1</code> t/ha abono vivero, <code>40</code> kg/ha DAP, <code>2</code> herbicida, <code>27.13</code> kg/ha urea, <code>10.38</code> kg/ha potasio, <code>15</code> kg/ha micronutrientes y <code>600</code> ml/ha pesticida). A su vez, <code>trash_ha</code> solo toma los valores 80 (831 filas), 90 (611 filas) y 100 (896 filas). Esto implica que los insumos fueron calculados multiplicando una receta fija por el número de hectáreas, sin variabilidad empírica entre agricultores.</li>
+</ul>
+<h3 id="distribución-de-superficies-y-rendimiento-medio">Distribución de superficies y rendimiento medio</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><code>hectares</code></th>
+<th style="text-align:left">N° de Registros</th>
+<th style="text-align:left">Rendimiento Total Medio (kg)</th>
+<th style="text-align:left"><code>rendimiento_ha</code> Medio (kg/ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>1</strong></td>
+<td style="text-align:left">203</td>
+<td style="text-align:left">5.745,69</td>
+<td style="text-align:left">5.745,69</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2</strong></td>
+<td style="text-align:left">357</td>
+<td style="text-align:left">11.479,49</td>
+<td style="text-align:left">5.739,75</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>3</strong></td>
+<td style="text-align:left">366</td>
+<td style="text-align:left">17.211,61</td>
+<td style="text-align:left">5.737,20</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>4</strong></td>
+<td style="text-align:left">533</td>
+<td style="text-align:left">24.435,94</td>
+<td style="text-align:left">6.108,98</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>5</strong></td>
+<td style="text-align:left">686</td>
+<td style="text-align:left">31.015,47</td>
+<td style="text-align:left">6.203,09</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>6</strong></td>
+<td style="text-align:left">193</td>
+<td style="text-align:left">36.256,38</td>
+<td style="text-align:left">6.042,73</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rendimiento-por-hectárea-según-variety-soil-types-nursery-y-agriblock">Rendimiento por hectárea según <code>Variety</code>, <code>Soil Types</code>, <code>Nursery</code> y <code>Agriblock</code></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Variable</th>
+<th style="text-align:left">Categoría</th>
+<th style="text-align:left">Media <code>rendimiento_ha</code> (kg/ha)</th>
+<th style="text-align:left">Desv. Estándar (kg/ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Variety</strong></td>
+<td style="text-align:left"><code>delux ponni</code> / <code>CO_43</code> / <code>ponmani</code></td>
+<td style="text-align:left">6.005,74 / 5.990,02 / 5.962,30</td>
+<td style="text-align:left">285,78 / 293,96 / 288,19</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Soil Types</strong></td>
+<td style="text-align:left"><code>clay</code> / <code>alluvial</code></td>
+<td style="text-align:left">5.987,96 / 5.981,50</td>
+<td style="text-align:left">289,93 / 288,77</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Nursery</strong></td>
+<td style="text-align:left"><code>wet</code> / <code>dry</code></td>
+<td style="text-align:left">5.986,92 / 5.983,35</td>
+<td style="text-align:left">291,93 / 287,21</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Agriblock</strong></td>
+<td style="text-align:left"><code>Sankarapuram</code> / <code>Chinnasalem</code> / <code>Kurinjipadi</code></td>
+<td style="text-align:left">6.003,52 / 5.989,77 / 5.986,52</td>
+<td style="text-align:left">291,00 / 292,84 / 289,89</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Agriblock</strong></td>
+<td style="text-align:left"><code>Kallakurichi</code> / <code>Panruti</code> / <code>Cuddalore</code></td>
+<td style="text-align:left">5.978,08 / 5.972,58 / 5.972,11</td>
+<td style="text-align:left">282,88 / 291,53 / 287,57</td>
+</tr>
+</tbody>
+</table>
+<h3 id="correlaciones-y-visualizaciones">Correlaciones y Visualizaciones</h3>
+<ul>
+<li><strong>Correlación <code>hectares</code> vs <code>paddy_yield_in_kg</code> = <code>0.9943</code>:</strong> Correlación lineal positiva casi perfecta porque el rendimiento total depende directamente del área cosechada.</li>
+<li><strong>Correlación <code>hectares</code> vs <code>rendimiento_ha</code> = <code>0.5949</code>:</strong> Correlación positiva moderada-alta, producto del incremento de rendimiento por hectárea que se observa en las parcelas de 4 a 6 ha en comparación con las de 1 a 3 ha.</li>
+</ul>
+<p><img src="fig_rendimiento_superficie.png" alt="Rendimiento por Hectárea según Superficie"></p>
+<p><img src="fig_rendimiento_variedad.png" alt="Rendimiento por Hectárea según Variedad"></p>
+<h3 id="tres-hallazgos-exploratorios-clave">Tres hallazgos exploratorios clave</h3>
+<ol>
+<li><strong>Salto escalonado de rendimiento en 4 y 5 ha:</strong> El rendimiento por hectárea es prácticamente constante en predios de 1, 2 y 3 ha (~5.737 a 5.746 kg/ha), pero da un salto abrupto en 4 ha (6.108,98 kg/ha) y alcanza su máximo en 5 ha (6.203,09 kg/ha), disminuyendo levemente en 6 ha (6.042,73 kg/ha).</li>
+<li><strong>Baja diferenciación por suelo, vivero, variedad y bloque:</strong> Las diferencias en el promedio de <code>rendimiento_ha</code> según suelo (6,46 kg/ha entre <code>clay</code> y <code>alluvial</code>), vivero (3,56 kg/ha entre <code>wet</code> y <code>dry</code>), bloque agrícola (31,41 kg/ha entre extremos) y variedad (43,44 kg/ha entre <code>delux ponni</code> y <code>ponmani</code>) son mínimas frente a la desviación estándar general (289,35 kg/ha).</li>
+<li><strong>Rigidez en insumos y clima (limitación del dataset):</strong> La totalidad de los insumos divididos por hectárea son constantes y el clima no varía dentro de cada bloque agrícola, lo que indica una construcción tabular o normativa de los datos.</li>
+</ol>
+<hr>
+<h2 id="4-modelación-predictiva-sección-13">4. Modelación Predictiva (Sección 1.3)</h2>
+<h3 id="resultados-en-el-conjunto-de-prueba-partición-7030-semilla-42">Resultados en el conjunto de prueba (partición 70/30, semilla 42)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Modelo</th>
+<th style="text-align:left">Variables Incluidas</th>
+<th style="text-align:left">MAE (kg/ha)</th>
+<th style="text-align:left">R² (Prueba)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Modelo Base</strong></td>
+<td style="text-align:left">Promedio de <code>rendimiento_ha</code> del entrenamiento</td>
+<td style="text-align:left">252,89</td>
+<td style="text-align:left">-0,0577</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Modelo A (manejo)</strong></td>
+<td style="text-align:left"><code>variety</code>, <code>soil_types</code>, <code>nursery</code>, <code>trash_ha</code></td>
+<td style="text-align:left">245,35</td>
+<td style="text-align:left">-0,0140</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Modelo B (clima)</strong></td>
+<td style="text-align:left">24 variables numéricas de lluvia, temp., viento y humedad</td>
+<td style="text-align:left">239,02</td>
+<td style="text-align:left">-0,0045</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Modelo C (superficie)</strong></td>
+<td style="text-align:left">Solo <code>hectares</code></td>
+<td style="text-align:left">179,73</td>
+<td style="text-align:left">0,3430</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Modelo D (todas)</strong></td>
+<td style="text-align:left">Todas las variables de A, B y C</td>
+<td style="text-align:left">177,13</td>
+<td style="text-align:left">0,3413</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Modelo de Contraste (Rendimiento total <code>paddy_yield_in_kg</code> usando solo <code>hectares</code>):</strong> MAE = 836,44 kg, R² = 0,9870.</li>
+</ul>
+<h3 id="interpretación-de-los-modelos">Interpretación de los Modelos</h3>
+<ul>
+<li><strong>(i) ¿Qué modelo predice mejor y qué grupos de variables aportan información?</strong><br>
+Los modelos <strong>C (superficie)</strong> y <strong>D (todas)</strong> logran el mejor desempeño, con <strong>R² = 0,3430</strong> y <strong>R² = 0,3413</strong>, reduciendo el MAE a <strong>179,73</strong> y <strong>177,13 kg/ha</strong> respectivamente. Los modelos <strong>A (manejo)</strong> y <strong>B (clima)</strong> obtienen R² cercanos a cero (-0,0140 y -0,0045). Esto demuestra que la <strong>superficie (<code>hectares</code>)</strong> es el único grupo que aporta señal predictiva sustantiva.</li>
+<li><strong>(ii) ¿Por qué el R² del rendimiento total es muy alto y por qué se prefiere el rendimiento por hectárea?</strong><br>
+El R² del rendimiento total es <strong>0,9870</strong> porque la producción total es el producto entre las hectáreas y el rendimiento por hectárea; como este último tiene muy baja dispersión relativa (coeficiente de variación de 4,83%), el tamaño del predio determina casi mecánicamente el volumen total cosechado. Se prefiere modelar <code>rendimiento_ha</code> porque normaliza el efecto de tamaño y mide la eficiencia productiva por unidad de tierra.</li>
+<li><strong>(iii) ¿Qué patrón sugiere la relación entre superficie y rendimiento por hectárea y qué limitaciones tiene un modelo lineal para describirla?</strong><br>
+La relación sigue un patrón <strong>escalonado no lineal</strong> (meseta de ~5.740 kg/ha en 1–3 ha, salto a ~6.109–6.203 kg/ha en 4–5 ha y baja a 6.043 kg/ha en 6 ha). Un modelo lineal solo puede ajustar una recta de pendiente constante, por lo que no logra representar simultáneamente el tramo plano inicial, el salto intermedio y la caída final.</li>
+<li><strong>(iv) A partir de la exploración, ¿es creíble concluir que el clima o el manejo no influyen en el rendimiento, o es una limitación de los datos? Justificar.</strong><br>
+No es creíble concluir que el clima o el manejo no influyan agronómicamente; es una <strong>limitación estructural de los datos</strong>. En el dataset los insumos por hectárea son constantes para todos los registros y las variables climáticas toman un único vector por bloque agrícola. Al no existir variación empírica independiente en esas variables, ningún modelo puede identificar su efecto.</li>
+</ul>
+<hr>
+<h2 id="5-ficha-de-asesoría-agrícola-sección-14">5. Ficha de Asesoría Agrícola (Sección 1.4)</h2>
+<p>El pipeline genera e imprime automáticamente el archivo <code>report/ficha.txt</code>:</p>
+<pre class="hljs"><code><div>Programa de Extension Agricola - Ficha de Asesoria
+Asesor: dst
+Registros unicos analizados: 2338
+Rendimiento medio: 5985.00 kg/ha
+Superficie de mayor rendimiento medio: 5 ha
+R2 del modelo de superficie (prueba): 0.3430
+
+</div></code></pre>
+<hr>
+<h2 id="6-limitaciones-del-dataset">6. Limitaciones del Dataset</h2>
+<ul>
+<li>
+<p><strong>(i) Insumos normativos sin variación real:</strong> Los 10 insumos agrícolas son múltiplos exactos de la superficie (<code>hectares</code>), reflejando una tabla teórica de recomendación y no la dosis real aplicada en cada parcela.</p>
+</li>
+<li>
+<p><strong>(ii) Clima agregado por bloque:</strong> Las 24 variables meteorológicas tienen un único valor por cada <code>agriblock</code>, impidiendo distinguir variaciones microclimáticas o entre temporadas.</p>
+</li>
+<li>
+<p><strong>(iii) Alta proporción de duplicados y baja dispersión:</strong> Se encontraron 451 copias duplicadas exactas en el archivo bruto y una desviación estándar muy reducida (~289 kg/ha sobre una media de 5.985 kg/ha), lo que sugiere datos altamente estandarizados o sintéticos.</p>
+</li>
+</ul>
+<hr>
+<h2 id="7-conclusiones-y-recomendaciones">7. Conclusiones y Recomendaciones</h2>
+<ul>
+<li>
+<p><strong>Conclusión:</strong> El análisis demuestra que, una vez depurados los 451 registros duplicados (quedando 2.338 registros únicos), las variables de manejo y clima no poseen capacidad predictiva sobre la eficiencia del cultivo debido a su falta de varianza en el dataset. El único predictor que explica parte de la variación del rendimiento por hectárea es la superficie (hectares, R^2 = 0,3430), impulsado por el salto de rendimiento registrado en los predios de 4 y 5 hectáreas.</p>
+</li>
+<li>
+<p><strong>Recomendación al Programa de Extensión Agrícola:</strong> Se recomienda verificar primero en terreno si el salto de rendimiento observado en los predios de 4 a 5 ha es un fenómeno agronómico real o un artefacto de cómo se construyó el dataset antes de utilizarlo para recomendar prácticas a los agricultores. Asimismo, es indispensable rediseñar la recolección de datos en futuras campañas para medir las dosis de insumos realmente aplicadas por parcela, asignar identificadores únicos de predio e incorporar mediciones meteorológicas locales.</p>
+</li>
+</ul>
+<hr>
+<h2 id="8-reproducibilidad-del-proyecto">8. Reproducibilidad del Proyecto</h2>
+<p>El proyecto, ya cuenta con los permisos para su ejecuccion, basta con utilizar el comando <code>bash scripts/pipeline.sh</code> y se ejecutara la siguiente secuencia: (1.1) descarga, limpieza de formato, validación de nulos/coherencia, deduplicación y cálculo de data/paddy_clean.csv; (1.2) estadísticos, cardinalidad, pruebas de clima/insumos, correlaciones y gráficos PNG en report/; (1.3) partición 70/30, entrenamiento en vw y tabla de métricas; y (1.4) creación e impresión de report/ficha.txt.</p>
+
+</body>
+</html>
